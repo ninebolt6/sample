@@ -18,13 +18,13 @@ pub struct Output {
 }
 
 pub fn get_top10_avg(logs: Vec<Log>) -> Vec<(u32, Vec<RankData>)> {
-    logs
-        .into_iter()
+    logs.into_iter()
         .into_group_map_by(|elt| elt.player_id.to_owned())
         .into_iter()
         .map(|(id, log)| RankData {
             player_id: id,
-            mean_score: (log.iter().fold(0.0, |acc, x| acc + x.score as f32) / log.len() as f32).round() as u32, // NOTE: 丸められる可能性あり
+            mean_score: (log.iter().fold(0.0, |acc, x| acc + x.score as f32) / log.len() as f32)
+                .round() as u32, // NOTE: 丸められる可能性あり
         })
         .into_group_map_by(|data| data.mean_score)
         .into_iter()

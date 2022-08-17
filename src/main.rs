@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
 
-use sample::{Log, get_top10_avg, get_top10_scorer};
+use sample::{get_top10_avg, get_top10_scorer, Log};
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
@@ -30,7 +30,14 @@ fn main() {
     let mut output_file = File::create("output.csv").expect("error creating output file.");
     writeln!(output_file, "rank,player_id,mean_score").expect("error writing data to output file.");
     for line in ranking {
-        writeln!(output_file, "{},{},{}", line.rank, line.player_id, line.mean_score).expect("error writing data to output file.");
+        writeln!(
+            output_file,
+            "{},{},{}",
+            line.rank, line.player_id, line.mean_score
+        )
+        .expect("error writing data to output file.");
     }
-    output_file.flush().expect("error saving data to output file.");
+    output_file
+        .flush()
+        .expect("error saving data to output file.");
 }
