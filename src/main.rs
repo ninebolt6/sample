@@ -14,7 +14,7 @@ fn main() {
     let logs = lines
         .map(|line| line.expect("bad csv"))
         .map(|line| {
-            let base: Vec<&str> = line.split(",").collect();
+            let base: Vec<&str> = line.split(',').collect();
             Log {
                 date: base[0].to_string(),
                 player_id: base[1].to_string(),
